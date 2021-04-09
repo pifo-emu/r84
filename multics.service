@@ -1,0 +1,15 @@
+ [Unit]
+Description=Multics daemon
+After=network.target
+Requires=network.target
+
+[Service]
+Type=forking
+ExecStart=/var/etc/bin/carlos.r69 -C /var/etc/r69-b/r69.cfg
+TimeoutStopSec=1
+Restart=always
+RestartSec=5
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
