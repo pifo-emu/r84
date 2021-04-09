@@ -1,15 +1,13 @@
- [Unit]
-Description=Multics daemon
-After=network.target
-Requires=network.target
+#!/bin/sh
 
-[Service]
-Type=forking
-ExecStart=/var/etc/bin/carlos.r69 -C /var/etc/r69-b/r69.cfg
-TimeoutStopSec=1
-Restart=always
-RestartSec=5
-StartLimitInterval=0
+if ps x |grep -v grep |grep -c carlos.r69  >/dev/null
+then
+echo "Multics... ok"
+else
+date=`date`
+echo "Restarting multics -a : $date" >> /var/log/autorun.log
 
-[Install]
-WantedBy=multi-user.target
+echo "multics... restarting"
+/var/etc/bin/carlos.r69 -C /var/etc/r69-b/r69.cfg  
+fi 
+
